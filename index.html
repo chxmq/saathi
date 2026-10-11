@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saathi: medicines, shared</title>
+  <meta name="description" content="Saathi helps elderly parents take their medicines on time, and lets their children see that they did.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231A2160%22/%3E%3Crect x=%226%22 y=%2211%22 width=%2220%22 height=%2210%22 rx=%225%22 fill=%22%23F2A20C%22/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,400..800&family=Anek+Devanagari:wdth,wght@75..125,400..800&family=Anek+Kannada:wdth,wght@75..125,400..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#demo">Skip to the demo</a>
+
+  <header class="masthead">
+    <p class="wordmark" aria-label="Saathi">saathi<span aria-hidden="true" class="wordmark-dose">1–0–1</span></p>
+    <h1>Amma takes her medicines. You know she did.</h1>
+    <p class="lede">Saathi gives elderly parents one big button for every dose, in their own language, and gives their children a quiet view of the week from wherever they live.</p>
+  </header>
+
+  <main id="demo">
+    <section class="clock" aria-labelledby="clock-label">
+      <div class="clock-head">
+        <h2 id="clock-label" class="clock-title">Move the clock to see the day play out</h2>
+        <output id="clock-readout" class="clock-readout" for="clock-range"></output>
+      </div>
+      <input id="clock-range" class="clock-range" type="range" min="360" max="1410" step="5" aria-describedby="clock-hint">
+      <div class="clock-marks" aria-hidden="true">
+        <span style="--at:0.1238">8 am</span>
+        <span style="--at:0.4381">1:30 pm</span>
+        <span style="--at:0.8571">9 pm</span>
+      </div>
+      <p id="clock-hint" class="clock-hint">Tap “I took them” on Amma’s phone and watch Rahul’s phone update. Leave a dose untaken for 30 minutes and he gets an alert.</p>
+      <button type="button" class="link-button" id="reset-demo">Reset the demo</button>
+    </section>
+
+    <div class="switcher" role="tablist" aria-label="Choose a phone">
+      <button type="button" role="tab" id="tab-elder" aria-controls="phone-elder" aria-selected="true">Amma’s phone</button>
+      <button type="button" role="tab" id="tab-care" aria-controls="phone-care" aria-selected="false">Rahul’s phone</button>
+    </div>
+
+    <div class="phones">
+      <section class="phone" id="phone-elder" role="tabpanel" aria-labelledby="tab-elder">
+        <p class="phone-owner" aria-hidden="true">Amma, Jayanagar, Bengaluru</p>
+        <div class="screen elder" id="elder" lang="en"></div>
+      </section>
+      <section class="phone" id="phone-care" role="tabpanel" aria-labelledby="tab-care">
+        <p class="phone-owner" aria-hidden="true">Rahul, working in Pune</p>
+        <div class="screen care" id="care"></div>
+      </section>
+    </div>
+  </main>
+
+  <section class="notes" aria-labelledby="notes-title">
+    <h2 id="notes-title">Design decisions</h2>
+    <div class="notes-grid">
+      <article>
+        <h3>Keep the notation doctors already write</h3>
+        <p>Indian prescriptions say <span class="inline-dose">1–0–1</span> for “morning and night”. Saathi uses the same shorthand everywhere: when adding a medicine, in the weekly view, in the summary for the doctor. Nobody has to learn a new schedule format.</p>
+      </article>
+      <article>
+        <h3>One decision per screen for Amma</h3>
+        <p>The elder view answers one question: what do I take now? The next dose fills the screen, each tablet is drawn the way it looks in the strip, and a single 72-pixel button confirms it. There are no menus to get lost in.</p>
+      </article>
+      <article>
+        <h3>Her language, read aloud</h3>
+        <p>Every line on Amma’s phone is available in English, Hindi and Kannada, and can be read out loud. Text size goes up to 150% without the layout breaking, and the default type is Atkinson Hyperlegible, drawn for low-vision readers.</p>
+      </article>
+      <article>
+        <h3>Reassure first, alert only when it matters</h3>
+        <p>Rahul’s phone leads with one plain sentence about today. Alerts fire only after a dose is 30 minutes late, and they offer the next useful action: call Amma. Refills show days left, not tablet counts.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Saathi is a prototype made for HyperBloom October 2026. Medicine names are generic examples, not medical advice.</p>
+  </footer>
+
+  <div class="modal-layer" id="modal-layer" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
