@@ -1,0 +1,29 @@
+rules_version = '2';
+// Saathi relay. Every document holds only ciphertext (AES-GCM, key shared by QR, never sent to the server).
+// A household id is 128 random bits and acts as the capability; nothing outside /h/{hid}/... is readable.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function validHousehold(hid) {
+      return hid.size() >= 22 && hid.size() <= 43 && hid.matches('^[A-Za-z0-9_-]+$');
+    }
+    function sealed() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['c', 'iv', 't'])
+        && d.c is string && d.c.size() > 0 && d.c.size() <= 200000
+        && d.iv is string && d.iv.size() <= 32
+        && d.t is int;
+    }
+    // Amma's phone publishes one sealed snapshot of what she chose to share.
+    match /h/{hid}/s/{doc} {
+      allow get, list: if validHousehold(hid);
+      allow create, update: if validHousehold(hid) && doc == 'state' && sealed();
+      allow delete: if validHousehold(hid);
+    }
+    // Rahul's phone drops sealed requests (reminder, hello, add-medicine) in Amma's inbox.
+    match /h/{hid}/in/{msg} {
+      allow get, list: if validHousehold(hid);
+      allow create: if validHousehold(hid) && sealed();
+      allow delete: if validHousehold(hid);
+    }
+  }
+}

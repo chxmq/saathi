@@ -6,9 +6,9 @@
   <title>Saathi: medicines, shared</title>
   <meta name="description" content="Saathi helps elderly parents take their medicines on time, and lets their children see that they did.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231A2160%22/%3E%3Crect x=%226%22 y=%2211%22 width=%2220%22 height=%2210%22 rx=%225%22 fill=%22%23F2A20C%22/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,400..800&family=Anek+Devanagari:wdth,wght@75..125,400..800&family=Anek+Kannada:wdth,wght@75..125,400..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1A2160">
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,6 +53,16 @@
     </div>
   </main>
 
+  <section class="real-cta" aria-labelledby="real-title">
+    <div class="real-cta-inner">
+      <div>
+        <h2 id="real-title">Use it for real, on two phones</h2>
+        <p>Set up Amma’s phone, scan the QR code from yours, and the two stay in sync. Doses, reminders and the weekly view are locked with a key that exists only on your two phones. Saathi’s server can’t read any of it.</p>
+      </div>
+      <a href="app.html">Open Saathi</a>
+    </div>
+  </section>
+
   <section class="notes" aria-labelledby="notes-title">
     <h2 id="notes-title">Design decisions</h2>
     <div class="notes-grid">
@@ -72,14 +82,22 @@
         <h3>Reassure first, alert only when it matters</h3>
         <p>Rahul’s phone leads with one plain sentence about today. Alerts fire only after a dose is 30 minutes late, and they offer the next useful action: call Amma. Refills show days left, not tablet counts.</p>
       </article>
+      <article>
+        <h3>Amma decides what is shared</h3>
+        <p>Before pairing, Amma sees in her own language exactly what her family will see. Medicine names stay private unless she turns them on. She can pause sharing, stop it, or delete everything from her phone and the server in one step.</p>
+      </article>
+      <article>
+        <h3>The server can’t read her medicines</h3>
+        <p>The pairing QR code carries a 256-bit key that never leaves the two phones. Saathi’s server only relays sealed data (AES-GCM), and prescriptions are read on the phone itself, so the photo is never uploaded. No accounts, no ads, no trackers, and fonts are served from the app itself.</p>
+      </article>
     </div>
   </section>
 
   <footer class="foot">
-    <p>Saathi is a prototype made for HyperBloom October 2026. Medicine names are generic examples, not medical advice.</p>
+    <p>Saathi was made for HyperBloom October 2026. The demo uses generic medicine names; it is not medical advice. Designed around the privacy principles of India’s DPDP Act: consent, purpose limitation and erasure.</p>
   </footer>
 
   <div class="modal-layer" id="modal-layer" hidden></div>
-  <script src="app.js"></script>
+  <script type="module" src="demo.js"></script>
 </body>
 </html>
