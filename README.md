@@ -6,6 +6,7 @@ Saathi helps elderly parents take their medicines on time, in their own language
 
 - **Guided demo** (both phones side by side, with a clock to scrub through a day): https://chxmq.github.io/saathi/
 - **The real app** (one phone each, paired by QR code): https://chxmq.github.io/saathi/app.html
+- **Also deployed on [Deployxa](https://deployxa.com):** https://saathi.deployxa.online (real app: https://saathi.deployxa.online/app.html). It builds from this repository's `main` branch, and the full two-phone privacy check passes there too.
 
 Built for HyperBloom October 2026 (UI/UX & Web Design). Runs entirely on free tiers.
 
